@@ -1,0 +1,1 @@
+Simple Go vSphere API tagging Client, e.g. to be used in conjunction with OpenFaaS functions. It's basically a wrapper around the [govmomi tagging client](https://github.com/vmware/govmomi/tree/master/vapi/tags).

@@ -1,0 +1,15 @@
+provider:
+  name: faas
+functions:
+  gotag-fn:
+    lang: golang-http
+    handler: ./gotag-fn
+    image: embano1/gotag-fn:0.1
+    environment:
+      VCURL: http://user:pass@vcsim-server.openfaas.svc.cluster.local:8989/sdk
+      TAGURN: urn:vmomi:InventoryServiceTag:4c57977e-27fa-4392-b344-0a90a502f524:GLOBAL
+      INSECURE: true
+      write_debug: false
+      read_debug: false
+    annotations:
+      topic: vm.powered.on
