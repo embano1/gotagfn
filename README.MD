@@ -3,9 +3,9 @@ OpenFaaS function (Golang) using the [OpenFaaS vCenter Connector](https://github
 
 # Usage
 ## Requirements
-These steps require a running [OpenFaaS](https://docs.openfaas.com/deployment/) and [vSphere (vCenter)](https://docs.vmware.com/en/VMware-vSphere/index.html) environment.
+These steps require a running [OpenFaaS](https://docs.openfaas.com/deployment/) and [vSphere (vCenter)](https://docs.vmware.com/en/VMware-vSphere/index.html) environment. Also, the [OpenFaaS vCenter Connector](https://github.com/openfaas-incubator/vcenter-connector) must set up correctly before deploying this example.
 
-If you want to change the function handler, you need a working [Go](https://golang.org/) environment.
+**Note:** If you want to change the function handler, you need a working [Go](https://golang.org/) environment.
 
 ## Deployment
 ### Supported `stack.yaml` parameters
