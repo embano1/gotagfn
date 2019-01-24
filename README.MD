@@ -13,9 +13,11 @@ Modify the function `stack.yaml` as per your environment:
 
 - Either add the OpenFaaS `gateway: <URL|IP>` information under `provider` or `export` it as an environment variable used by `faas-cli`
 - Modify environment variables:
-  - VCURL    - URL to vCenter
-  - TAGURN   - Unique ID for the tag to be attached
+  - VCURL    - URL to vCenter (e.g. `https://vcenter.local`)
+  - VCUSER   - Username to connect to vCenter
+  - VCPASS   - Password to connect to vCenter
   - INSECURE - Don't verify certificate of vCenter when connecting with TLS 
+  - TAGURN   - Unique ID for the tag to be attached (e.g. `urn:vmomi:InventoryServiceTag:604e66d9-97d4-414c-82f5-d25475320087:GLOBAL`)
 - A key-value annotation defines which VM event should trigger the function
   - A list of VM events from vCenter can be found [here](https://code.vmware.com/doc/preview?id=4206#/doc/vim.event.VmEvent.html)
   - The `topic` key-value annotation uses `.` syntax, e.g. `VmPoweredOnEvent` maps to `vm.powered.on`
