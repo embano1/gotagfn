@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/embano1/faastagger"
 	"github.com/openfaas-incubator/go-function-sdk"
@@ -21,6 +23,7 @@ var (
 	vcPass     string
 	tagID      string
 	insecure   bool
+	sigCh      = make(chan os.Signal)
 )
 
 func init() {
@@ -30,13 +33,18 @@ func init() {
 	vcUser = os.Getenv("VCUSER")
 	vcPass = os.Getenv("VCPASS")
 	tagID = os.Getenv("TAGURN")
+
 	if os.Getenv("INSECURE") == "true" {
 		insecure = true
 	}
+
 	tagger, err = faastagger.New(ctx, nil, vCenterURL, vcUser, vcPass, insecure)
 	if err != nil {
 		log.Fatalf("could not get tags: %v", err)
 	}
+
+	signal.Notify(sigCh, syscall.SIGTERM, os.Interrupt)
+	go handleSignal(ctx, sigCh)
 }
 
 // Handle a function invocation
@@ -68,14 +76,19 @@ func Handle(req handler.Request) (handler.Response, error) {
 	}
 
 	log.Printf("successfully tagged VM %v with tag %s", event.MoRef, tagID)
-	err = tagger.Close(ctx)
-	if err != nil {
-		log.Printf("could not close connection: %v", err)
-	}
 
 	return handler.Response{
 		Body:       []byte(fmt.Sprintf("successfully tagged VM %v with tag %s", event.MoRef, tagID)),
 		StatusCode: http.StatusOK,
 	}, err
 
+}
+
+func handleSignal(ctx context.Context, sigCh <-chan os.Signal) {
+	s := <-sigCh
+	log.Printf("got signal: %v", s)
+	err := tagger.Close(ctx)
+	if err != nil {
+		log.Printf("could not close connection to vCenter: %v", err)
+	}
 }
