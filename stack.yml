@@ -6,10 +6,10 @@ functions:
     handler: ./gotag-fn
     image: embano1/gotag-fn:0.1
     environment:
-      VCURL: 
-      VCUSER: 
-      VCPASS: 
-      TAGURN: 
+      VC: 
+      VC_USER: 
+      VC_PASS: 
+      TAG_URN: 
       INSECURE: false
     annotations:
       topic: vm.powered.on

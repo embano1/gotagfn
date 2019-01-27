@@ -29,10 +29,10 @@ var (
 func init() {
 	// open reusable connection to vCenter
 	// not checking env variables here as faastagger.New would throw error when connecting to VC
-	vCenterURL = os.Getenv("VCURL")
-	vcUser = os.Getenv("VCUSER")
-	vcPass = os.Getenv("VCPASS")
-	tagID = os.Getenv("TAGURN")
+	vCenterURL = os.Getenv("VC")
+	vcUser = os.Getenv("VC_USER")
+	vcPass = os.Getenv("VC_PASS")
+	tagID = os.Getenv("TAG_URN")
 
 	if os.Getenv("INSECURE") == "true" {
 		insecure = true
