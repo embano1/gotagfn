@@ -2,12 +2,12 @@
 
 
 [[projects]]
-  digest = "1:3e1acc6c881e2c534e96781dbc9eb5888753ee51ff8b6cfe34736e1b6d179871"
+  digest = "1:b16714163f4987be162561b3ed80532f9082844a77cd2149a9bb5580dcd41743"
   name = "github.com/embano1/faastagger"
   packages = ["."]
   pruneopts = "UT"
-  revision = "9a91db785782af89784b0e418e4c4a1673056120"
-  version = "v1.0.1"
+  revision = "21a6379e1a4d56d877e8584df4671aee76a5b33d"
+  version = "v1.0.2"
 
 [[projects]]
   digest = "1:86aada1f67a0c33c39e3a071b31e56f3da18890c2441fd14fc8385c0ed3da355"

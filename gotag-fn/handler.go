@@ -60,13 +60,14 @@ func Handle(req handler.Request) (handler.Response, error) {
 	}
 
 	// did we get a ManagedObjectReference?
-	if event.MoRef == nil {
+	// TODO: change to ManagedObjectReference
+	if event.ManagedObjectReference == nil {
 		return handler.Response{
 			Body:       nil,
 			StatusCode: http.StatusBadRequest,
 		}, fmt.Errorf("managedobjectreference must not be nil")
 	}
-	ref := event.MoRef
+	ref := event.ManagedObjectReference
 	err = tagger.TagVM(ctx, ref, tagID)
 	if err != nil {
 		return handler.Response{
@@ -75,10 +76,10 @@ func Handle(req handler.Request) (handler.Response, error) {
 		}, err
 	}
 
-	log.Printf("successfully tagged VM %v with tag %s", event.MoRef, tagID)
+	log.Printf("successfully tagged VM %v with tag %s", event.ManagedObjectReference, tagID)
 
 	return handler.Response{
-		Body:       []byte(fmt.Sprintf("successfully tagged VM %v with tag %s", event.MoRef, tagID)),
+		Body:       []byte(fmt.Sprintf("successfully tagged VM %v with tag %s", event.ManagedObjectReference, tagID)),
 		StatusCode: http.StatusOK,
 	}, err
 
